@@ -1,11 +1,23 @@
+import 'dart:ffi';
+
 import 'package:flutter/material.dart';
+import 'package:registration/Modules/CommonViews/AppDateDropdown.dart';
+import 'package:registration/Modules/CommonViews/AppTimeDropdown.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/CommonViews/StepTitle.dart';
+import 'package:registration/Modules/PersonalInfo/Widgets/DateTimeButton.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
 
-class MeetingInfo extends StatelessWidget {
+class MeetingInfo extends StatefulWidget {
   const MeetingInfo({Key key}) : super(key: key);
 
+  @override
+  _MeetingInfoState createState() => _MeetingInfoState();
+}
+
+class _MeetingInfoState extends State<MeetingInfo> {
+  String selectedDate;
+  Duration sellectedTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -31,17 +43,18 @@ class MeetingInfo extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    "Complexity: ",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "Very Week",
-                    style: TextStyle(color: Colors.yellow[800]),
-                  ),
-                ],
+              DateTimeButton(
+                hintText: "Date",
+                value: selectedDate ?? "- Choose Date -",
+                onPressed: this._showDatePicker,
+              ),
+              SizedBox(
+                height: 30,
+              ),
+              DateTimeButton(
+                hintText: "Time",
+                value: this.sellectedTime.toString() ?? "- Choose Date -",
+                onPressed: this._showTimePicker,
               ),
               SizedBox(
                 height: 30,
@@ -61,5 +74,51 @@ class MeetingInfo extends StatelessWidget {
   _nextPressed(context) {
     // Navigator.push(
     //     context, MaterialPageRoute(builder: (context) => PersonalInfo()));
+  }
+
+  _showDatePicker(context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Container(
+                height: 270,
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    Text("Date Picker"),
+                    AppDateDropdown(
+                      selectedDate: (_selectedDate) {
+                        this.setState(() {
+                          this.selectedDate = _selectedDate;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ));
+  }
+
+  _showTimePicker(context) {
+    showDialog(
+        context: context,
+        builder: (context) => AlertDialog(
+              content: Container(
+                height: 270,
+                width: 300,
+                child: Column(
+                  children: <Widget>[
+                    Text("Date Picker"),
+                    AppTimeDropdown(
+                      selectedTime: (_time) {
+                        this.setState(() {
+                          this.sellectedTime = _time;
+                        });
+                      },
+                    ),
+                  ],
+                ),
+              ),
+            ));
   }
 }
