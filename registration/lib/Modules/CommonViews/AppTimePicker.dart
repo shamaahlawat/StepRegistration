@@ -2,9 +2,9 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'dart:io' show Platform;
 
-class AppTimeDropdown extends StatelessWidget {
-  final Function selectedTime;
-  AppTimeDropdown({Key key, this.selectedTime}) : super(key: key);
+class AppTimePicker extends StatelessWidget {
+  final Function timeDidSelected;
+  AppTimePicker({Key key, this.timeDidSelected}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -27,7 +27,8 @@ class AppTimeDropdown extends StatelessWidget {
           color: Colors.blue,
           child: Text("Done"),
           onPressed: () {
-            this.selectedTime(_selectedTime);
+            this.timeDidSelected(
+                _selectedTime ?? Duration(hours: 0, minutes: 0));
             Navigator.pop(context);
           },
         )

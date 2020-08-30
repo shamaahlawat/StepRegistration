@@ -1,8 +1,8 @@
-import 'dart:ffi';
-
+import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
+import 'package:intl/intl.dart';
 import 'package:registration/Modules/CommonViews/AppDateDropdown.dart';
-import 'package:registration/Modules/CommonViews/AppTimeDropdown.dart';
+import 'package:registration/Modules/CommonViews/AppTimePicker.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/CommonViews/StepTitle.dart';
 import 'package:registration/Modules/PersonalInfo/Widgets/DateTimeButton.dart';
@@ -17,7 +17,7 @@ class MeetingInfo extends StatefulWidget {
 
 class _MeetingInfoState extends State<MeetingInfo> {
   String selectedDate;
-  Duration sellectedTime;
+  String selectedTime;
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -46,14 +46,16 @@ class _MeetingInfoState extends State<MeetingInfo> {
               DateTimeButton(
                 hintText: "Date",
                 value: selectedDate ?? "- Choose Date -",
-                onPressed: this._showDatePicker,
+                onPressed: Platform.isIOS
+                    ? this._showiOSDatePicker
+                    : this._showAndroidDatePicker,
               ),
               SizedBox(
                 height: 30,
               ),
               DateTimeButton(
                 hintText: "Time",
-                value: this.sellectedTime.toString() ?? "- Choose Date -",
+                value: this.selectedTime.toString() ?? "- Choose Date -",
                 onPressed: this._showTimePicker,
               ),
               SizedBox(
@@ -76,7 +78,7 @@ class _MeetingInfoState extends State<MeetingInfo> {
     //     context, MaterialPageRoute(builder: (context) => PersonalInfo()));
   }
 
-  _showDatePicker(context) {
+  _showiOSDatePicker(context) {
     showDialog(
         context: context,
         builder: (context) => AlertDialog(
@@ -109,10 +111,10 @@ class _MeetingInfoState extends State<MeetingInfo> {
                 child: Column(
                   children: <Widget>[
                     Text("Date Picker"),
-                    AppTimeDropdown(
-                      selectedTime: (_time) {
+                    AppTimePicker(
+                      timeDidSelected: (_time) {
                         this.setState(() {
-                          this.sellectedTime = _time;
+                          this.selectedTime = format(_time);
                         });
                       },
                     ),
@@ -121,4 +123,20 @@ class _MeetingInfoState extends State<MeetingInfo> {
               ),
             ));
   }
+
+  _showAndroidDatePicker(BuildContext context) async {
+    final DateTime picked = await showDatePicker(
+      context: context,
+      initialDate: DateTime.now(), // Refer step 1
+      firstDate: DateTime(2000),
+      lastDate: DateTime(2025),
+    );
+    if (picked != null)
+      setState(() {
+        DateFormat dateFormat = DateFormat("dd-MMM-yyyy");
+        selectedDate = dateFormat.format(picked);
+      });
+  }
+
+  format(Duration d) => d.toString().substring(2, 7);
 }

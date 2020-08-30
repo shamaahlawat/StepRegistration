@@ -14,36 +14,24 @@ class AppDateDropdown extends StatelessWidget {
     return Column(
       children: <Widget>[
         Container(
-          height: 200,
-          child: Platform.isIOS
-              ? CupertinoDatePicker(
-                  mode: CupertinoDatePickerMode.date,
-                  onDateTimeChanged: (DateTime newDateTime) {
-                    DateFormat dateFormat = DateFormat("dd-MMM-yyyy");
-                    _selectedDate = dateFormat.format(newDateTime);
-                    print(_selectedDate);
-                  },
-                )
-              : _showAndroidPicker(context),
-        ),
+            height: 200,
+            child: CupertinoDatePicker(
+              mode: CupertinoDatePickerMode.date,
+              onDateTimeChanged: (DateTime newDateTime) {
+                DateFormat dateFormat = DateFormat("dd-MMM-yyyy");
+                _selectedDate = dateFormat.format(newDateTime);
+                print(_selectedDate);
+              },
+            )),
         FlatButton(
           color: Colors.blue,
-          child: Text("Done"),
+          child: Text("Done".toString()),
           onPressed: () {
             this.selectedDate(_selectedDate);
             Navigator.pop(context);
           },
         )
       ],
-    );
-  }
-
-  _showAndroidPicker(context) async {
-    return await showDatePicker(
-      context: context,
-      initialDate: DateTime.now(),
-      firstDate: DateTime(2000),
-      lastDate: DateTime(2025),
     );
   }
 }
