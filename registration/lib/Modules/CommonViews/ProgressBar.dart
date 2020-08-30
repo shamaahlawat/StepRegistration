@@ -37,7 +37,7 @@ class ProgresBar extends StatelessWidget {
       decoration: BoxDecoration(
         borderRadius: BorderRadius.circular(25),
         border: Border.all(color: Colors.black),
-        color: index == currentIndex ? Colors.green : Colors.white,
+        color: index <= currentIndex ? Colors.green : Colors.white,
       ),
       child: Text(
         "$index",

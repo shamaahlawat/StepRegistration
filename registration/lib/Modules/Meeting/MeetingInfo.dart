@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/CommonViews/StepTitle.dart';
-import 'package:registration/Modules/Password/Widgets/ComplexityView.dart';
-import 'package:registration/Modules/Password/Widgets/PasswordTextField.dart';
-import 'package:registration/Modules/PersonalInfo/PersonalInfo.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
 
-class Password extends StatelessWidget {
-  const Password({Key key}) : super(key: key);
+class MeetingInfo extends StatelessWidget {
+  const MeetingInfo({Key key}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -21,16 +18,16 @@ class Password extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
               ProgresBar(
-                currentIndex: 1,
+                currentIndex: 3,
               ),
               SizedBox(
                 height: 50,
               ),
               StepTitle(
-                title: "Create Password",
-                subTitle: "Password will be used to login to account",
+                title: "Schedule Video Call",
+                subTitle:
+                    "Choose the date and time that you preffered. We will send a link by email to make a video call on the scheduled date and time",
               ),
-              PasswordTextField(),
               SizedBox(
                 height: 30,
               ),
@@ -49,7 +46,6 @@ class Password extends StatelessWidget {
               SizedBox(
                 height: 30,
               ),
-              ComplexityView(),
               Spacer(),
               NextButton(
                 height: 100,
@@ -63,7 +59,7 @@ class Password extends StatelessWidget {
   }
 
   _nextPressed(context) {
-    Navigator.push(
-        context, MaterialPageRoute(builder: (context) => PersonalInfo()));
+    // Navigator.push(
+    //     context, MaterialPageRoute(builder: (context) => PersonalInfo()));
   }
 }

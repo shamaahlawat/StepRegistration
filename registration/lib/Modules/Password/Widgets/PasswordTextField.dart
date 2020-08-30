@@ -12,6 +12,7 @@ class PasswordTextField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey[200], borderRadius: BorderRadius.circular(7)),
       child: TextField(
+        obscureText: true,
         decoration: InputDecoration(
             suffixIcon: Icon(Icons.remove_red_eye),
             border: InputBorder.none,
