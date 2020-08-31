@@ -36,6 +36,7 @@ class _WelcomeState extends State<Welcome> {
                 margin: EdgeInsets.only(
                   top: 120,
                   left: 20,
+                  right: 20
                 ),
                 child: Column(
                   children: <Widget>[

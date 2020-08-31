@@ -16,14 +16,13 @@ class NextButton extends StatelessWidget {
       color:
           this.backgroundColor == null ? Colors.blueAccent : Colors.grey[100],
       child: Container(
-        margin: EdgeInsets.only(right: 20, left: 20),
+       // margin: EdgeInsets.only(right: 20, ),
         color:
-            this.onPressed == null ? Colors.blue[50] : Colors.blueAccent[100],
+            this.onPressed == null ? Colors.blueAccent[100] : Colors.blue,
         height: 50,
         width: MediaQuery.of(context).size.width,
         child: FlatButton(
-          color:
-              this.onPressed == null ? Colors.blue[50] : Colors.blueAccent[100],
+          color: this.onPressed == null ? Colors.blueAccent[100] : Colors.blue,
           child: Text(
             "Next",
             style: TextStyle(color: Colors.white, fontSize: 16),

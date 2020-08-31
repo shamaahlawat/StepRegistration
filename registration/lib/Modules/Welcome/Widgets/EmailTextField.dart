@@ -16,7 +16,9 @@ class EmailTextField extends StatelessWidget {
       height: 105,
       decoration: BoxDecoration(
           color: Colors.white, borderRadius: BorderRadius.circular(7)),
-      margin: EdgeInsets.only(top: 50, right: 20),
+      margin: EdgeInsets.only(
+        top: 50,
+      ),
       child: Column(
         crossAxisAlignment: CrossAxisAlignment.start,
         children: <Widget>[

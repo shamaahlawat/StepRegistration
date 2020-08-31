@@ -58,9 +58,16 @@ class ComplexityView extends StatelessWidget {
                     Container(
                       alignment: Alignment.center,
                       child: _verificationStatus(type)
-                          ? Icon(
-                              Icons.check_circle,
-                              color: Colors.green,
+                          ? Container(
+                              height: 30,
+                              width: 30,
+                              decoration: BoxDecoration(
+                                  color: Colors.green,
+                                  borderRadius: BorderRadius.circular(15)),
+                              child: Icon(
+                                Icons.check,
+                                color: Colors.white,
+                              ),
                             )
                           : Text(
                               type.getType(),
