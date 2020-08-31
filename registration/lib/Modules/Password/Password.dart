@@ -30,7 +30,9 @@ class Password extends StatelessWidget {
                 title: "Create Password",
                 subTitle: "Password will be used to login to account",
               ),
-              PasswordTextField(),
+              PasswordTextField(
+                passwordDidChange: this._passwordDidChange,
+              ),
               SizedBox(
                 height: 30,
               ),
@@ -65,5 +67,9 @@ class Password extends StatelessWidget {
   _nextPressed(context) {
     Navigator.push(
         context, MaterialPageRoute(builder: (context) => PersonalInfo()));
+  }
+
+  _passwordDidChange(status) {
+    print(status);
   }
 }

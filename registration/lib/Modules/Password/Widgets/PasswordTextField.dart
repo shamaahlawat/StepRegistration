@@ -1,7 +1,10 @@
 import 'package:flutter/material.dart';
+import 'package:registration/Modules/Password/Widgets/ComplexityView.dart';
+import 'package:registration/Utils/Constants.dart';
 
 class PasswordTextField extends StatelessWidget {
-  const PasswordTextField({Key key}) : super(key: key);
+  final Function passwordDidChange;
+  const PasswordTextField({Key key, this.passwordDidChange}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -17,7 +20,23 @@ class PasswordTextField extends StatelessWidget {
             suffixIcon: Icon(Icons.remove_red_eye),
             border: InputBorder.none,
             hintText: "Create Password"),
+        onChanged: (password) => _validatePassword(password),
       ),
     );
+  }
+
+  _validatePassword(String password) {
+    bool hasUppercase = password.contains(upperCaseRejex);
+    bool hasDigits = password.contains(numberRejex);
+    bool hasLowercase = password.contains(lowerCaseRejex);
+    bool hasSpecialCharacters = password.contains(specialcharectorRejex);
+    bool reacheMax = password.length > minChar;
+    final status = {
+      VerificationType.lower: hasLowercase,
+      VerificationType.upper: hasUppercase,
+      VerificationType.number: hasDigits,
+      VerificationType.charector: reacheMax
+    };
+    this.passwordDidChange(status);
   }
 }

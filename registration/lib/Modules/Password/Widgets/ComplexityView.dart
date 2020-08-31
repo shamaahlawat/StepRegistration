@@ -17,8 +17,8 @@ class ComplexityView extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.spaceAround,
         children: <Widget>[
           Container(
-            alignment: Alignment.center,
-              child: _createTypes(context: context, veryfied: true)),
+              alignment: Alignment.center,
+              child: _createTypes(context: context, veryfied: false)),
         ],
       ),
     );
@@ -47,7 +47,9 @@ class ComplexityView extends StatelessWidget {
                                   TextStyle(fontSize: 30, color: Colors.white),
                             ),
                     ),
-                    SizedBox(height: 10,),
+                    SizedBox(
+                      height: 10,
+                    ),
                     Text(type.getTitle(),
                         style: TextStyle(fontSize: 12, color: Colors.white))
                   ],
