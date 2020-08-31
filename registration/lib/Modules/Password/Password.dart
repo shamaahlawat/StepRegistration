@@ -16,6 +16,7 @@ class Password extends StatefulWidget {
 
 class _PasswordState extends State<Password> {
   final _bloc = PasswordBloc();
+  final _controller = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return StreamBuilder<Object>(
@@ -43,6 +44,7 @@ class _PasswordState extends State<Password> {
                     PasswordTextField(
                       passwordDidChange: this._passwordDidChange,
                       bloc: this._bloc,
+                      controller: this._controller,
                     ),
                     SizedBox(
                       height: 30,
@@ -54,7 +56,9 @@ class _PasswordState extends State<Password> {
                     Spacer(),
                     NextButton(
                       height: 100,
-                      onPressed: this._nextPressed,
+                      onPressed: this._controller.text.length > 0
+                          ? this._nextPressed
+                          : null,
                     ),
                   ],
                 ),

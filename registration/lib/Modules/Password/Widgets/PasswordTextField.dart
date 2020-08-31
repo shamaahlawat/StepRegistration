@@ -2,9 +2,11 @@ import 'package:flutter/material.dart';
 import 'package:registration/Modules/Password/Bloc/PasswordBloc.dart';
 
 class PasswordTextField extends StatelessWidget {
+  final TextEditingController controller;
   final PasswordBloc bloc;
   final Function passwordDidChange;
-  const PasswordTextField({Key key, this.passwordDidChange, this.bloc})
+  const PasswordTextField(
+      {Key key, this.passwordDidChange, this.bloc, this.controller})
       : super(key: key);
 
   @override
@@ -16,6 +18,7 @@ class PasswordTextField extends StatelessWidget {
       decoration: BoxDecoration(
           color: Colors.grey[200], borderRadius: BorderRadius.circular(7)),
       child: TextField(
+        controller: this.controller,
         obscureText: true,
         decoration: InputDecoration(
             suffixIcon: Icon(Icons.remove_red_eye),
