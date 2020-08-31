@@ -1,10 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/Password/Password.dart';
-import 'package:registration/Modules/Welcome/Widgets/Bloc/LoginBloc.dart';
 import 'package:registration/Modules/Welcome/Widgets/EmailTextField.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
 import 'package:registration/Modules/Welcome/Widgets/WelcomeTitle.dart';
+
+import 'Bloc/LoginBloc.dart';
 
 class Welcome extends StatefulWidget {
   const Welcome({Key key}) : super(key: key);

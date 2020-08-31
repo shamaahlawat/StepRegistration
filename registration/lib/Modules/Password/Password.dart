@@ -1,67 +1,67 @@
 import 'package:flutter/material.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/CommonViews/StepTitle.dart';
+import 'package:registration/Modules/Password/Bloc/PasswordBloc.dart';
 import 'package:registration/Modules/Password/Widgets/ComplexityView.dart';
 import 'package:registration/Modules/Password/Widgets/PasswordTextField.dart';
 import 'package:registration/Modules/PersonalInfo/PersonalInfo.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
 
-class Password extends StatelessWidget {
+class Password extends StatefulWidget {
   const Password({Key key}) : super(key: key);
 
   @override
+  _PasswordState createState() => _PasswordState();
+}
+
+class _PasswordState extends State<Password> {
+  final _bloc = PasswordBloc();
+  @override
   Widget build(BuildContext context) {
-    return Scaffold(
-      backgroundColor: Colors.blueAccent,
-      body: SingleChildScrollView(
-        child: Container(
-          height: MediaQuery.of(context).size.height - 150,
-          margin: EdgeInsets.only(top: 120, left: 20, right: 20),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              ProgresBar(
-                currentIndex: 1,
+    return StreamBuilder<Object>(
+        stream: _bloc.stream,
+        builder: (context, snapshot) {
+          return Scaffold(
+            backgroundColor: Colors.blueAccent,
+            body: SingleChildScrollView(
+              child: Container(
+                height: MediaQuery.of(context).size.height - 150,
+                margin: EdgeInsets.only(top: 120, left: 20, right: 20),
+                child: Column(
+                  crossAxisAlignment: CrossAxisAlignment.start,
+                  children: <Widget>[
+                    ProgresBar(
+                      currentIndex: 1,
+                    ),
+                    SizedBox(
+                      height: 50,
+                    ),
+                    StepTitle(
+                      title: "Create Password",
+                      subTitle: "Password will be used to login to account",
+                    ),
+                    PasswordTextField(
+                      passwordDidChange: this._passwordDidChange,
+                      bloc: this._bloc,
+                    ),
+                    SizedBox(
+                      height: 30,
+                    ),
+                    ComplexityView(
+                      status:
+                          snapshot.hasData ? snapshot.data : PasswordStatus(),
+                    ),
+                    Spacer(),
+                    NextButton(
+                      height: 100,
+                      onPressed: this._nextPressed,
+                    ),
+                  ],
+                ),
               ),
-              SizedBox(
-                height: 50,
-              ),
-              StepTitle(
-                title: "Create Password",
-                subTitle: "Password will be used to login to account",
-              ),
-              PasswordTextField(
-                passwordDidChange: this._passwordDidChange,
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              Row(
-                children: <Widget>[
-                  Text(
-                    "Complexity: ",
-                    style: TextStyle(color: Colors.white),
-                  ),
-                  Text(
-                    "Very Week",
-                    style: TextStyle(color: Colors.yellow[800]),
-                  ),
-                ],
-              ),
-              SizedBox(
-                height: 30,
-              ),
-              ComplexityView(),
-              Spacer(),
-              NextButton(
-                height: 100,
-                onPressed: this._nextPressed,
-              ),
-            ],
-          ),
-        ),
-      ),
-    );
+            ),
+          );
+        });
   }
 
   _nextPressed(context) {
@@ -71,5 +71,11 @@ class Password extends StatelessWidget {
 
   _passwordDidChange(status) {
     print(status);
+  }
+
+  @override
+  void dispose() {
+    this._bloc.dispose();
+    super.dispose();
   }
 }

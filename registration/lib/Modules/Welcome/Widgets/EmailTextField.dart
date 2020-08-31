@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:registration/Modules/Welcome/Widgets/Bloc/LoginBloc.dart';
+import 'package:registration/Modules/Welcome/Bloc/LoginBloc.dart';
 
 class EmailTextField extends StatelessWidget {
   final String errorMessage;

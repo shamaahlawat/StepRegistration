@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:registration/Modules/Password/Bloc/PasswordBloc.dart';
 
 class ComplexityView extends StatelessWidget {
-  ComplexityView({Key key}) : super(key: key);
+  final PasswordStatus status;
+  ComplexityView({Key key, this.status}) : super(key: key);
 
   final verificationTypes = [
     VerificationType.lower,
@@ -13,12 +15,31 @@ class ComplexityView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Container(
-      child: Row(
-        mainAxisAlignment: MainAxisAlignment.spaceAround,
+      child: Column(
         children: <Widget>[
-          Container(
-              alignment: Alignment.center,
-              child: _createTypes(context: context, veryfied: false)),
+          Row(
+            children: <Widget>[
+              Text(
+                "Complexity: ",
+                style: TextStyle(color: Colors.white),
+              ),
+              Text(
+                this.status.getStatusString(),
+                style: TextStyle(color: Colors.yellow[800]),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 30,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            children: <Widget>[
+              Container(
+                  alignment: Alignment.center,
+                  child: _createTypes(context: context, veryfied: false)),
+            ],
+          ),
         ],
       ),
     );
@@ -36,7 +57,7 @@ class ComplexityView extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       alignment: Alignment.center,
-                      child: veryfied
+                      child: _verificationStatus(type)
                           ? Icon(
                               Icons.check_circle,
                               color: Colors.green,
@@ -57,6 +78,23 @@ class ComplexityView extends StatelessWidget {
               ),
             )
             .toList());
+  }
+
+  _verificationStatus(VerificationType type) {
+    switch (type) {
+      case VerificationType.lower:
+        return this.status.hasLowercase;
+      case VerificationType.upper:
+        return this.status.hasUppercase;
+
+      case VerificationType.number:
+        return this.status.hasDigits;
+
+      case VerificationType.charector:
+        return this.status.hasMax;
+
+      default:
+    }
   }
 }
 
