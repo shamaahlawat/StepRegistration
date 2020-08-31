@@ -1,10 +1,11 @@
 import 'dart:io' show Platform;
 import 'package:flutter/material.dart';
 import 'package:intl/intl.dart';
-import 'package:registration/Modules/CommonViews/AppDateDropdown.dart';
+import 'package:registration/Modules/CommonViews/AppDatePicker.dart';
 import 'package:registration/Modules/CommonViews/AppTimePicker.dart';
 import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/CommonViews/StepTitle.dart';
+import 'package:registration/Modules/Meeting/Widgets/CalendarIcon.dart';
 import 'package:registration/Modules/PersonalInfo/Widgets/DateTimeButton.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
 
@@ -32,8 +33,12 @@ class _MeetingInfoState extends State<MeetingInfo> {
               ProgresBar(
                 currentIndex: 3,
               ),
+              Container(
+                child: CalendarIcon(),
+                height: 80,
+              ),
               SizedBox(
-                height: 50,
+                height: 20,
               ),
               StepTitle(
                 title: "Schedule Video Call",
@@ -55,7 +60,9 @@ class _MeetingInfoState extends State<MeetingInfo> {
               ),
               DateTimeButton(
                 hintText: "Time",
-                value: this.selectedTime.toString() ?? "- Choose Date -",
+                value: this.selectedTime == null
+                    ? "- Choose Date -"
+                    : this.selectedTime.toString(),
                 onPressed: this._showTimePicker,
               ),
               SizedBox(
@@ -88,7 +95,7 @@ class _MeetingInfoState extends State<MeetingInfo> {
                 child: Column(
                   children: <Widget>[
                     Text("Date Picker"),
-                    AppDateDropdown(
+                    AppDatePicker(
                       selectedDate: (_selectedDate) {
                         this.setState(() {
                           this.selectedDate = _selectedDate;

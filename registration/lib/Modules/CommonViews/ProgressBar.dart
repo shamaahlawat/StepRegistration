@@ -48,7 +48,7 @@ class ProgresBar extends StatelessWidget {
 
   Widget _stepDivider(BuildContext context) {
     final width = MediaQuery.of(context).size.width;
-    final stepWidth = (width - 300) / (steps.length - 1);
+    final stepWidth = (width - 250) / (steps.length - 1);
     return Container(
       width: stepWidth,
       height: 3,
