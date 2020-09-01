@@ -22,11 +22,15 @@ class _MeetingInfoState extends State<MeetingInfo> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Create Account"),
+        backgroundColor: Colors.blueAccent,
+      ),
       backgroundColor: Colors.blueAccent,
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height - 150,
-          margin: EdgeInsets.only(top: 120, left: 20, right: 20),
+          margin: EdgeInsets.only(top: 30, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -64,9 +68,6 @@ class _MeetingInfoState extends State<MeetingInfo> {
                     ? "- Choose Date -"
                     : this.selectedTime.toString(),
                 onPressed: this._showTimePicker,
-              ),
-              SizedBox(
-                height: 30,
               ),
               Spacer(),
               NextButton(

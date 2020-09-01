@@ -56,11 +56,15 @@ class PersonalInfo extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: Text("Create Account"),
+        backgroundColor: Colors.blueAccent,
+      ),
       backgroundColor: Colors.blueAccent,
       body: SingleChildScrollView(
         child: Container(
           height: MediaQuery.of(context).size.height - 150,
-          margin: EdgeInsets.only(top: 120, left: 20, right: 20),
+          margin: EdgeInsets.only(top: 30, left: 20, right: 20),
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
@@ -95,9 +99,6 @@ class PersonalInfo extends StatelessWidget {
               AppDropdown(
                 hintText: "Monthly expense",
                 data: expenceData,
-              ),
-              SizedBox(
-                height: 30,
               ),
               Spacer(),
               NextButton(

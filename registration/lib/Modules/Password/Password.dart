@@ -23,11 +23,15 @@ class _PasswordState extends State<Password> {
         stream: _bloc.stream,
         builder: (context, snapshot) {
           return Scaffold(
+            appBar: AppBar(
+              title: Text("Create Account"),
+              backgroundColor: Colors.blueAccent,
+            ),
             backgroundColor: Colors.blueAccent,
             body: SingleChildScrollView(
               child: Container(
-                height: MediaQuery.of(context).size.height - 150,
-                margin: EdgeInsets.only(top: 120, left: 20, right: 20),
+                height: MediaQuery.of(context).size.height - 250,
+                margin: EdgeInsets.only(top: 30, left: 20, right: 20),
                 child: Column(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
@@ -35,7 +39,7 @@ class _PasswordState extends State<Password> {
                       currentIndex: 1,
                     ),
                     SizedBox(
-                      height: 50,
+                      height: 30,
                     ),
                     StepTitle(
                       title: "Create Password",

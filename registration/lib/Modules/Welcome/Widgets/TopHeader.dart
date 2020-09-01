@@ -7,7 +7,6 @@ class TopHeader extends StatelessWidget {
   Widget build(BuildContext context) {
     return CustomPaint(
       child: Container(
-        // color: Colors.blue,
         height: 220,
         width: MediaQuery.of(context).size.width,
       ),
@@ -23,9 +22,9 @@ class CurvePainter extends CustomPainter {
     Paint paint = Paint();
     path.lineTo(0, size.height * 0.97);
 
-    path.moveTo(0, size.height);
+    path.moveTo(0, size.height + 40);
     path.quadraticBezierTo(
-        30.1, size.height / 1.7, size.width, size.height + 40);
+        10.1, size.height / 1.7, size.width, size.height + 40);
     path.lineTo(size.width, 0);
     path.lineTo(0, 0);
     path.close();
