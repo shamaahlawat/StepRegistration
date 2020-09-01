@@ -3,6 +3,7 @@ import 'package:registration/Modules/CommonViews/ProgressBar.dart';
 import 'package:registration/Modules/Password/Password.dart';
 import 'package:registration/Modules/Welcome/Widgets/EmailTextField.dart';
 import 'package:registration/Modules/Welcome/Widgets/NextButton.dart';
+import 'package:registration/Modules/Welcome/Widgets/TopHeader.dart';
 import 'package:registration/Modules/Welcome/Widgets/WelcomeTitle.dart';
 
 import 'Bloc/LoginBloc.dart';
@@ -31,33 +32,35 @@ class _WelcomeState extends State<Welcome> {
         builder: (context, snapshot) {
           return Scaffold(
             backgroundColor: Colors.grey[200],
-            body: SingleChildScrollView(
-              child: Container(
-                margin: EdgeInsets.only(
-                  top: 120,
-                  left: 20,
-                  right: 20
-                ),
-                child: Column(
-                  children: <Widget>[
-                    ProgresBar(
-                      currentIndex: 0,
+            body: Stack(
+              children: <Widget>[
+                TopHeader(),
+                SingleChildScrollView(
+                  child: Container(
+                    margin: EdgeInsets.only(top: 120, left: 20, right: 20),
+                    child: Column(
+                      children: <Widget>[
+                        ProgresBar(
+                          currentIndex: 0,
+                        ),
+                        WelcomeTitle(),
+                        WelcomeSubtitle(),
+                        EmailTextField(
+                          controller: _emailCntroller,
+                          bloc: _bloc,
+                          errorMessage:
+                              snapshot.hasData ? this._getError(snapshot) : '',
+                        ),
+                        NextButton(
+                          onPressed:
+                              isEmailValidated ? this._nextPressed : null,
+                          backgroundColor: Colors.grey[100],
+                        )
+                      ],
                     ),
-                    WelcomeTitle(),
-                    WelcomeSubtitle(),
-                    EmailTextField(
-                      controller: _emailCntroller,
-                      bloc: _bloc,
-                      errorMessage:
-                          snapshot.hasData ? this._getError(snapshot) : '',
-                    ),
-                    NextButton(
-                      onPressed: isEmailValidated ? this._nextPressed : null,
-                      backgroundColor: Colors.grey[100],
-                    )
-                  ],
+                  ),
                 ),
-              ),
+              ],
             ),
           );
         });
